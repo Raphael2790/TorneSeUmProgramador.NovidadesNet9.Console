@@ -9,4 +9,12 @@
     <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 
+	<PropertyGroup>
+		<NoWarn>FuncaoEmTeste</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);TorneSeUmProgramador.NovidadesNet9.Console.Interceptadores</InterceptorsPreviewNamespaces>
+	</PropertyGroup>
+
 </Project>

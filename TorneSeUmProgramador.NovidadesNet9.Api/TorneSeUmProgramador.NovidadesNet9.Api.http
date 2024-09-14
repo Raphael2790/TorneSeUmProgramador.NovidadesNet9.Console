@@ -1,0 +1,6 @@
+@TorneSeUmProgramador.NovidadesNet9.Api_HostAddress = http://localhost:5202
+
+GET {{TorneSeUmProgramador.NovidadesNet9.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
