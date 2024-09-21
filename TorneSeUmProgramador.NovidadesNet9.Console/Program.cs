@@ -71,3 +71,18 @@ Dicionario dicionario = new();
 int[] numeros = { 1, 2, 3, 4, 5 };
 int[] subArray = numeros[1..^1];
 Console.WriteLine(string.Join(",", subArray));
+
+async IAsyncEnumerable<string> StreamDataAsync()
+{
+    // Simula a produção de dados assíncrona
+    for (var i = 0; i < 10; i++)
+    {
+        await Task.Delay(1000); // Simula uma operação assíncrona (ex: leitura de banco de dados)
+        yield return $"Processado linha {i}. data: {DateTime.Now}";
+    }
+}
+
+await foreach (var data in StreamDataAsync())
+{
+    Console.WriteLine(data);
+}
