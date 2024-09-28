@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading.RateLimiting;
 using TorneSeUmProgramador.NovidadesNet8.Api.Middlewares;
 using TorneSeUmProgramador.NovidadesNet8.Api.UseCases;
@@ -170,6 +171,18 @@ app.MapGet("frozen-collections", () =>
     });
 });
 
+app.MapGet("regex-generator", (string texto) =>
+{
+    var regex = MyRegex();
+
+    if (regex.IsMatch(texto))
+    {
+        return Results.Ok("Válido");
+    }
+
+    return Results.BadRequest("Inválido");
+});
+
 app.Run();
 
 public record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
@@ -189,4 +202,10 @@ public class WeatherForecastBase
 public class WeatherForecastWithCity : WeatherForecastBase
 {
     public string? City { get; set; }
+}
+
+partial class Program
+{
+    [GeneratedRegex(@"\d{3}-\d{2}-\d{4}", RegexOptions.IgnoreCase)]
+    private static partial Regex MyRegex();
 }

@@ -6,6 +6,7 @@ using Point = (int x, int y);
 using Aluno = (string Nome, int Idade);
 using Z = int?;
 using Dicionario = System.Collections.Generic.Dictionary<string, string>;
+using System.ComponentModel.DataAnnotations;
 
 //Console.WriteLine("Hello, World!");
 
@@ -66,11 +67,31 @@ Point p = (10, 20);
 Aluno a = ("Rafael", 30);
 Z z = 10;
 Dicionario dicionario = new();
+var senha = "123456";
+
+var bytes = System.Text.Encoding.UTF8.GetBytes(senha);
+var base64 = Convert.ToBase64String(bytes);
+
+aluno2.HashSenha = base64+"quauaha";
+
+var validationResults = new List<ValidationResult>();
+var validationContext = new ValidationContext(aluno2, serviceProvider: null, items: null);
+
+bool valido = Validator.TryValidateObject(aluno2, validationContext, validationResults, true);
 
 //range operator
 int[] numeros = { 1, 2, 3, 4, 5 };
 int[] subArray = numeros[1..^1];
 Console.WriteLine(string.Join(",", subArray));
+
+
+//Utf8 Literals
+//string s1 = "hello"u8;             // Error
+//var s2 = "hello"u8;                // Okay and type is ReadOnlySpan<byte>
+//ReadOnlySpan<byte> s3 = "hello"u8; // Okay.
+//byte[] s4 = "hello"u8;             // Error - Cannot implicitly convert type 'System.ReadOnlySpan<byte>' to 'byte[]'.
+//byte[] s5 = "hello"u8.ToArray();   // Okay.
+//Span<byte> s6 = "hello"u8;         // Error - Cannot implicitly convert type 'System.ReadOnlySpan<byte>' to 'System.Span<byte>'.
 
 async IAsyncEnumerable<string> StreamDataAsync()
 {
